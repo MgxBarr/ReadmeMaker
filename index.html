@@ -5,8 +5,8 @@
     <meta name="author" content="Margaux Barrouillet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>README MAKER</title>
-    <link rel="stylesheet" type="text/css" href="assets/style.css"/>
-    <link rel="icon" type="image/png" href="assets/bw-readme.png" />
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" type="image/png" href="bw-readme.png" />
   </head>
   <body>
     <div id="content">
@@ -14,16 +14,16 @@
         <div id="content-middle">
 
             <div id="content-left">
-                <h2 id="edit">Éditer</h2>
-                <div id="message">Cliquez sur entrée pour valider chaque input.</div>
+                <h2 id="edit">Edit</h2>
+                <div id="message">Click enter to validate each input.</div>
                 <div id="modifications">
 
                     <div class="add-name">
-                        <input type="text" class="input" id="title" placeholder="Titre" onkeydown="handleKeyPress(event,'title')">
+                        <input type="text" class="input" id="title" placeholder="Title" onkeydown="handleKeyPress(event,'title')">
                     </div>
                     
                     <div class="add-name">
-                        <input type="text" class="input" id="workers" placeholder="Workers" onkeydown="handleKeyPress(event,'workers')">
+                        <input type="text" class="input" id="workers" placeholder="Authors" onkeydown="handleKeyPress(event,'workers')">
                     </div>
                     <div class="add-name">
                         <textarea name="title" class="input" id="description" cols="40" rows="5" placeholder="Description" onkeydown="handleKeyPress(event,'description')"></textarea>
@@ -145,7 +145,7 @@
         
             </div>
             <div id="content-right">
-                <h2 style="margin-top:6vh;">Aperçu</h2>
+                <h2 style="margin-top:6vh;">Overview</h2>
                 
                 <div id="resultat">
                     <div id="title-overview">
@@ -170,7 +170,7 @@
                 <div id="bottom-left">
                     <!--modal-->
                     <div class="box" id="box1" onclick="openmodal(this)">
-                        <p class="button">Générer le code</p>
+                        <p class="button">Generate code</p>
                     </div>
                     <div id="modal-box1" class="modal">
                         <div class="modal-content">
@@ -199,7 +199,7 @@
                                 
                             </div>
                             <div id="copy-button">
-                                <input type="button" class="button" value="Copier" onclick="copier()">
+                                <input type="button" class="button" value="Copy" onclick="copier()">
                             </div>
                         </div>
                     </div>

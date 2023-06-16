@@ -1,6 +1,5 @@
 # Readme Maker
-
-#### Mgx
+#### By Mgx
 
 
 ## Description

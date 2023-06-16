@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Margaux Barrouillet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README MAKER</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" type="image/png" href="bw-readme.png" />
+  </head>
+  <body>
+    <div id="content">
+        <div id="menu"><h2 id="title-page">README MAKER</h2></div>
+        <div id="content-middle">
+
+            <div id="content-left">
+                <h2 id="edit">Éditer</h2>
+                <div id="message">Cliquez sur entrée pour valider chaque input.</div>
+                <div id="modifications">
+
+                    <div class="add-name">
+                        <input type="text" class="input" id="title" placeholder="Titre" onkeydown="handleKeyPress(event,'title')">
+                    </div>
+                    
+                    <div class="add-name">
+                        <input type="text" class="input" id="workers" placeholder="Workers" onkeydown="handleKeyPress(event,'workers')">
+                    </div>
+                    <div class="add-name">
+                        <textarea name="title" class="input" id="description" cols="40" rows="5" placeholder="Description" onkeydown="handleKeyPress(event,'description')"></textarea>
+                    </div>
+                    <div class="add-name">
+                        <input type="text" class="input" id="technologies" placeholder="Technologies used" onkeydown="handleKeyPress(event,'technologies')">
+                    </div>
+                    <div class="add-name">
+                        <input type="text" class="input" id="installation" placeholder="Installation step" onkeydown="handleKeyPress(event,'setup')"> 
+                        <input type="text" class="input" id="code" placeholder="Code for step" onkeydown="handleKeyPress(event,'setup')">
+                    </div>
+                    <div class="add-name">
+                        <input type="text" class="input" id="tryit" placeholder="Adress to try it" onkeydown="handleKeyPress(event,'tryit')">
+                    </div>
+                    <div class="scrollbar" id="style-7">
+                        <div class="force-overflow"></div>
+                      </div>
+                </div>
+                <script>
+                    function handleKeyPress(event, type) {
+                        if (event.keyCode === 13) {
+                            add_content(type);
+                        }
+                    }
+
+                    var tmp_description = 0; 
+                    var tmp_setup = 0; 
+
+                    //ajout content dans aperçu et modal
+                    function add_content(type){
+                        if (type !='setup'){
+                            var content = document.getElementById(type).value; 
+                        }
+                        var id_div = type+'-overview'; 
+                        var id_modal = type+'-modal'; 
+                        var div = document.getElementById(id_div); 
+                        var div_modal = document.getElementById(id_modal); 
+
+                        if (type =="title"){
+                            div.innerHTML = '<h2>'+content+'</h2>'; 
+                            document.getElementById(type).value=""; 
+
+                            div_modal.innerHTML = '#'+content+'<br>'; 
+                        }
+                        if (type =="workers"){
+                            div.innerHTML = 'By '+content; 
+                            document.getElementById(type).value=""; 
+
+                            div_modal.innerHTML = '####'+content+'<br><br>'; 
+                        }
+                        if (type =="technologies"){
+                            if (tmp_description == 0){
+                                div.innerHTML = '<h2>Technologies used</h2><br><li> '+content+'</li>'; 
+                                document.getElementById(type).value=""; 
+
+                                div_modal.innerHTML = '<br>## Technologies Used <br><br>* '+content+'<br>';
+                            }else{
+                                div.innerHTML+='<li>'+content+'</li>'; 
+                                document.getElementById(type).value="";  
+
+                                div_modal.innerHTML += '* '+content+'<br>'; 
+                            }
+                            tmp_description++; 
+                        }
+                        if (type =="description"){
+                            div.innerHTML = '<h2>Description</h2><br> '+content; 
+                            document.getElementById(type).value="";  
+
+                            div_modal.innerHTML = '<br>## Description <br><br>'+content+'<br><br>';
+                        }
+                        if (type == 'setup'){
+                            var content_installation = document.getElementById('installation').value; 
+                            var content_code = document.getElementById('code').value; 
+                            
+                            if (tmp_setup == 0){
+                                div.innerHTML = '<h2>Installation Steps :</h2> <br><li>'+content_installation +'</li><br>'; 
+
+                                div_modal.innerHTML = '<br><br>## Setup/Installation Requirements<br><br>* '+content_installation+'<br>'; 
+                                if (content_code.length != 0){
+                                    div.innerHTML+="<div id='code_github'>"+content_code+'</div><br>'; 
+                                    div_modal.innerHTML += '```sh<br>'+content_code+'<br>```<br>'; 
+                                }
+                            }else {
+                                div.innerHTML += '<li>'+content_installation +'</li><br>'
+                                div_modal.innerHTML += '* '+content_installation+'<br>';
+                                if (content_code.length != 0) {
+                                    div.innerHTML+= "<div id='code_github'>"+content_code+'</div><br>';
+                                    div_modal.innerHTML += '```sh<br>'+content_code+'<br>```<br>'; 
+                                }
+                            }
+                            tmp_setup++; 
+                            document.getElementById('installation').value=""; 
+                            document.getElementById('code').value=""; 
+                        }
+                        if (type =="tryit"){
+                            div.innerHTML = '<h2>Try it</h2><br> You can see the project at this <a  href="'+content+'" id="link_project">adress</a>'; 
+                            document.getElementById(type).value="";  
+
+                            div_modal.innerHTML = '<br><br>## Try it <br><br>* You can see the project at this [adress]('+content+').<br>';
+                        }
+                    }
+
+                    //copier le code dans le modal
+                    function copier(){
+                        var textToCopy = document.getElementById("text-modal").innerText;
+                        var tempInput = document.createElement("textarea");
+                        tempInput.style.position = "absolute";
+                        tempInput.style.left = "-1000px";
+                        tempInput.value = textToCopy;
+                        document.body.appendChild(tempInput);
+                        
+                        tempInput.select();
+                        document.execCommand("copy");
+                        document.body.removeChild(tempInput);
+                        
+                        alert("Le contenu a été copié avec succès !");
+                    }
+                </script>
+        
+            </div>
+            <div id="content-right">
+                <h2 style="margin-top:6vh;">Aperçu</h2>
+                
+                <div id="resultat">
+                    <div id="title-overview">
+
+                    </div>
+                    <div id="workers-overview">
+                        
+                    </div>
+                    <div id="description-overview">
+                        
+                    </div>
+                    <div id="technologies-overview">
+                        
+                    </div>
+                    <div id="setup-overview">
+                        
+                    </div>
+                    <div id="tryit-overview">
+                        
+                    </div>
+                </div>
+                <div id="bottom-left">
+                    <!--modal-->
+                    <div class="box" id="box1" onclick="openmodal(this)">
+                        <p class="button">Générer le code</p>
+                    </div>
+                    <div id="modal-box1" class="modal">
+                        <div class="modal-content">
+                            <span id="close-box1" class="close">&times;</span>
+                            <h1 class="title-modal">Code</h1>
+                            <div class="text-modal" id="text-modal">
+
+                                <div id="title-modal">
+
+                                </div>
+                                <div id="workers-modal">
+                                    
+                                </div>
+                                <div id="description-modal">
+                                    
+                                </div>
+                                <div id="technologies-modal">
+                                    
+                                </div>
+                                <div id="setup-modal">
+                                    
+                                </div>
+                                <div id="tryit-modal">
+                                    
+                                </div>
+                                
+                            </div>
+                            <div id="copy-button">
+                                <input type="button" class="button" value="Copier" onclick="copier()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script> 
+        //fonction pour ouvrir un modal
+        function openmodal(m) {
+          document.body.classList.add("scrolling")
+          var modal=document.getElementById("modal-"+m.id);
+          modal.style.display="flex"; //block
+  
+          //ferme le modal si on clique sur sa croix
+          document.getElementById("close-"+m.id).onclick = function() {
+              modal.style.animation = "unloading 0.7s";
+              setTimeout(() => {  modal.style.display = "none", modal.style.animation="loading 0.7s", document.body.classList.remove("scrolling")}, 650);
+          }
+  
+          //ferme le modal si on clique en dehors
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.animation = "unloading 0.7s";
+                  setTimeout(() => {  modal.style.display = "none", modal.style.animation="loading 0.7s",  document.body.classList.remove("scrolling")}, 650);
+              }
+          }
+        }
+    </script>
+    
+  </body>
+</html>

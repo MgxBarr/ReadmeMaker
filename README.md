@@ -23,3 +23,5 @@ A simple readme maker containing the basic information for a project
 ## Try it
 
 * You can see the project at this [adress](coming).
+
+#### This readme has been generated with readme maker :)

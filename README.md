@@ -22,7 +22,7 @@ A simple readme maker containing the basic information for a project
 
 ## Try it
 
-* You can see the project at this [adress](coming).
+* You can see the project at this [adress][https://mgxbarr.github.io/ReadmeMaker/].
 
 
 #### This readme has been generated with readme maker :)
